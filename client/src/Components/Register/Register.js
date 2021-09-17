@@ -35,12 +35,23 @@ const Register = (props) => {
   return (
     <div>
       <form onSubmit={registerHandler}>
-        <label>UserName</label>
-        <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
-        <label>Email</label>
-        <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
-        <label>Password</label>
+        <label htmlFor="register__username">UserName</label>
         <input
+          id="register__username"
+          type="text"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
+        <label htmlFor="resgister__email">Email</label>
+        <input
+          id="register__email"
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <label htmlFor="resgister__password">Password</label>
+        <input
+          id="register__password"
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
