@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import classes from "./ResetPassword.module.css";
+
 const ResetPassword = (props) => {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
@@ -28,8 +30,8 @@ const ResetPassword = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={resetPasswordHandler}>
+    <div className={classes.resetPassword}>
+      <form onSubmit={resetPasswordHandler} className={classes.resetPassword__form}>
         <label>New Password</label>
         <input type="text" value={password} onChange={(event) => setPassword(event.target.value)} />
         {success && (

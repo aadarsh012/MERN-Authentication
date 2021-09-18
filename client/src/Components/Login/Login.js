@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import classes from "./Login.module.css";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -25,8 +26,8 @@ const Login = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={(event) => loginHandler(event)}>
+    <div className={classes.login}>
+      <form onSubmit={(event) => loginHandler(event)} className={classes.login__form}>
         <label>Email ID</label>
         <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
         <label>Password</label>
@@ -35,12 +36,12 @@ const Login = (props) => {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
+        <span>
+          <Link to="/forgotPassword">Forgot Password?</Link>
+        </span>
         <button type="submit"> Login</button>
         <span>
           Don't have an account? <Link to="/register"> Register</Link>
-        </span>
-        <span>
-          <Link to="/forgotPassword">Forgot Password?</Link>
         </span>
       </form>
     </div>

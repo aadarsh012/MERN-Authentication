@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import classes from "./Register.module.css";
+
 const Register = (props) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -33,8 +35,8 @@ const Register = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={registerHandler}>
+    <div className={classes.register}>
+      <form onSubmit={registerHandler} className={classes.register__form}>
         <label htmlFor="register__username">UserName</label>
         <input
           id="register__username"
@@ -42,14 +44,14 @@ const Register = (props) => {
           value={username}
           onChange={(event) => setUsername(event.target.value)}
         />
-        <label htmlFor="resgister__email">Email</label>
+        <label htmlFor="register__email">Email</label>
         <input
           id="register__email"
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-        <label htmlFor="resgister__password">Password</label>
+        <label htmlFor="register__password">Password</label>
         <input
           id="register__password"
           type="password"
