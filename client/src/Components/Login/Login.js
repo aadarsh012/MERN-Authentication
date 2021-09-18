@@ -6,6 +6,7 @@ import classes from "./Login.module.css";
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const loginHandler = async (event) => {
     event.preventDefault();
@@ -21,17 +22,27 @@ const Login = (props) => {
       localStorage.setItem("authToken", data.token);
       props.history.push("/");
     } catch (error) {
-      console.log(error.response.data.error);
+      setError("Invalid Credentials!");
+      setTimeout(() => {
+        setError("");
+      }, 2000);
     }
   };
 
   return (
     <div className={classes.login}>
+      <span className={classes.error}>{error}</span>
       <form onSubmit={(event) => loginHandler(event)} className={classes.login__form}>
-        <label>Email ID</label>
-        <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
-        <label>Password</label>
+        <label htmlFor="login__email">Email ID</label>
         <input
+          id="login__email"
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <label htmlFor="login__password">Password</label>
+        <input
+          id="login__password"
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}

@@ -6,6 +6,7 @@ import classes from "./ResetPassword.module.css";
 const ResetPassword = (props) => {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const resetPasswordHandler = async (event) => {
     event.preventDefault();
@@ -26,14 +27,24 @@ const ResetPassword = (props) => {
     } catch (error) {
       console.log(error.response.data.error);
       setSuccess(false);
+      setError("Weak Password!");
+      setTimeout(() => {
+        setError("");
+      }, 2000);
     }
   };
 
   return (
     <div className={classes.resetPassword}>
+      <span className={classes.error}>{error}</span>
       <form onSubmit={resetPasswordHandler} className={classes.resetPassword__form}>
-        <label>New Password</label>
-        <input type="text" value={password} onChange={(event) => setPassword(event.target.value)} />
+        <label htmlFor="resetPassword__password">New Password</label>
+        <input
+          id="resetPassword__password"
+          type="text"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
         {success && (
           <span>
             Successful! <Link to="/login">Login</Link>

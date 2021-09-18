@@ -7,6 +7,7 @@ const Register = (props) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   // useEffect(()=>{
   //     if(!localStorage.getItem(authToken))
@@ -21,6 +22,20 @@ const Register = (props) => {
       }
     };
 
+    if (!username || !email || !password) {
+      setError("Please Provide Your Credentials");
+      setTimeout(() => {
+        setError("");
+      }, 2000);
+    }
+
+    if (password.length < 8) {
+      setError("Weak Password");
+      setTimeout(() => {
+        setError("");
+      }, 2000);
+    }
+
     try {
       const { data } = await axios.post(
         "/api/auth/register",
@@ -29,13 +44,12 @@ const Register = (props) => {
       );
       localStorage.setItem("authToken", data.token);
       props.history.push("/");
-    } catch (error) {
-      console.log(error.response.data.error);
-    }
+    } catch (error) {}
   };
 
   return (
     <div className={classes.register}>
+      <span className={classes.error}>{error}</span>
       <form onSubmit={registerHandler} className={classes.register__form}>
         <label htmlFor="register__username">UserName</label>
         <input
