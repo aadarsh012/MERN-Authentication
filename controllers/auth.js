@@ -70,7 +70,7 @@ exports.forgotPassword = async (req, res, next) => {
         subject: "Reset Password",
         text: message
       });
-      res.status(200).json({ success: true, data: "Email Sent" });
+      res.status(200).json({ success: true, resetToken });
     } catch (error) {
       user.resetPasswordToken = undefined;
       user.resetPasswordDate = undefined;
@@ -105,7 +105,7 @@ exports.resetPassword = async (req, res, next) => {
 
     await user.save();
 
-    res.status(200).json({ success: true, data: "Password has been reset." });
+    res.status(200).json({ success: true, data: "password Reset" });
   } catch (error) {
     next(error);
   }

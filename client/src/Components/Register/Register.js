@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Register.module.css";
 
@@ -9,9 +9,11 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // useEffect(()=>{
-  //     if(!localStorage.getItem(authToken))
-  // },[props.history])
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      props.history.push("/");
+    }
+  }, [props.history]);
 
   const registerHandler = async (event) => {
     event.preventDefault();
@@ -27,9 +29,7 @@ const Register = (props) => {
       setTimeout(() => {
         setError("");
       }, 2000);
-    }
-
-    if (password.length < 8) {
+    } else if (password.length < 8) {
       setError("Weak Password");
       setTimeout(() => {
         setError("");
@@ -44,7 +44,9 @@ const Register = (props) => {
       );
       localStorage.setItem("authToken", data.token);
       props.history.push("/");
-    } catch (error) {}
+    } catch (error) {
+      setError(error.response.data.error);
+    }
   };
 
   return (

@@ -7,6 +7,12 @@ const ForgotPassword = (props) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      props.history.push("/");
+    }
+  }, [props.history]);
+
   const sendEmailHandler = async (event) => {
     event.preventDefault();
     const config = {
@@ -17,6 +23,7 @@ const ForgotPassword = (props) => {
 
     try {
       const data = await axios.post("/api/auth/forgotpassword", { email }, config);
+      localStorage.setItem("resetToken", data.data.resetToken);
       setSuccess(data.data);
     } catch (error) {
       console.log(error.response.data.error);

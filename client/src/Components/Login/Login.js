@@ -8,6 +8,12 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      props.history.push("/");
+    }
+  }, [props.history]);
+
   const loginHandler = async (event) => {
     event.preventDefault();
 

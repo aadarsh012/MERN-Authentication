@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import Private from "../PrivateComponent/Private";
 
 const PrivateRoute = (props) => {
