@@ -5,6 +5,23 @@ body {
 .App {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+footer {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  background-color: #5cdb95;
+  height: 3.5em;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+footer img {
+  width: 2em;
+  height: 2em;
 }

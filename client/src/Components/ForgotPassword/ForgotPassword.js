@@ -1,4 +1,5 @@
 import axios from "axios";
+import crypto from "crypto";
 import { useState, useEffect } from "react";
 import classes from "./ForgotPassword.module.css";
 
@@ -8,6 +9,7 @@ const ForgotPassword = (props) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    document.title = "Forgot Password";
     if (localStorage.getItem("authToken")) {
       props.history.push("/");
     }
@@ -15,6 +17,7 @@ const ForgotPassword = (props) => {
 
   const sendEmailHandler = async (event) => {
     event.preventDefault();
+
     const config = {
       headers: {
         "Content-Type": "application/json"
@@ -23,8 +26,9 @@ const ForgotPassword = (props) => {
 
     try {
       const data = await axios.post("/api/auth/forgotpassword", { email }, config);
-      localStorage.setItem("resetToken", data.data.resetToken);
+      const resetToken = crypto.createHash("sha256").update(data.data.resetToken).digest("hex");
       setSuccess(data.data);
+      localStorage.setItem("resetToken", resetToken);
     } catch (error) {
       console.log(error.response.data.error);
       setSuccess(false);

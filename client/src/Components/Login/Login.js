@@ -9,6 +9,7 @@ const Login = (props) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    document.title = "Login";
     if (localStorage.getItem("authToken")) {
       props.history.push("/");
     }

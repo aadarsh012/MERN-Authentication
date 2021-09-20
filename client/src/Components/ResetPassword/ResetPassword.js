@@ -1,4 +1,5 @@
 import axios from "axios";
+import crypto from "crypto";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./ResetPassword.module.css";
@@ -10,9 +11,12 @@ const ResetPassword = (props) => {
   const [errorPage, setErrorPage] = useState(false);
 
   useEffect(() => {
-    const resetToken = localStorage.getItem("resetToken");
-    if (resetToken !== props.match.params.resetToken) {
-      localStorage.removeItem("resetToken");
+    document.title = "Reset Password";
+    const resetToken = crypto
+      .createHash("sha256")
+      .update(props.match.params.resetToken)
+      .digest("hex");
+    if (resetToken !== localStorage.getItem("resetToken")) {
       setErrorPage(true);
     }
   }, [props.match]);

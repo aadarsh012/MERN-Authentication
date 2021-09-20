@@ -10,6 +10,7 @@ const Register = (props) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    document.title = "Register";
     if (localStorage.getItem("authToken")) {
       props.history.push("/");
     }
