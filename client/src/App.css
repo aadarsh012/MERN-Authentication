@@ -24,4 +24,17 @@ footer {
 footer img {
   width: 2em;
   height: 2em;
+  margin-left: 5px;
+}
+
+footer p {
+  color: rgb(0, 0, 88);
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  footer {
+    height: 3em;
+    position: absolute;
+  }
 }

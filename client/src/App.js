@@ -20,8 +20,8 @@ function App() {
         </Switch>
       </div>
       <footer>
-        <p>Created By AADARSH SHAW | </p>
-        <a href="https://github.com/aadarsh012">
+        <p>Created By AADARSH SHAW </p>
+        <a href="https://github.com/aadarsh012" target="_blank">
           <img src="github-logo.png" />
         </a>
       </footer>
